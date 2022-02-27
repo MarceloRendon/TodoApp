@@ -49,3 +49,20 @@ txtInput.addEventListener('keyup', (event) => {
     }
 
 });
+
+divTodoList.addEventListener('click', (event) => {
+    //console.log('Click');
+    //console.log(event.target.localName);
+    const nombreElemento = event.target.localName; //input, label o button
+    const todoElemento = event.target.parentElement.parentElement; //permite tener la referencia al li
+
+    const todoId = todoElemento.getAttribute('data-id'); //obtiene el id
+
+    if (nombreElemento.includes('input')) { // hizo click en el check
+        todoList.marcarCompletado(todoId);
+        todoElemento.classList.toggle('completed'); //permite que se tache la tarea marcada en el checkbox
+    } 
+
+
+    console.log(todoList);
+});

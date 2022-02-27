@@ -20,6 +20,12 @@ export class TodoList {
 
     marcarCompletado (id) {
 
+        for (const todo of this.todos){
+            if (todo.id == id){ //si el id todo que se evalua es igual al  id que se recibe
+                todo.completado = !todo.completado; // el todo completado será igual a la negación del todo.completado
+                break; //break para salir del ciclo
+            }
+        }
     }
 
     eliminarCompletados () {
