@@ -9,6 +9,8 @@ const divTodoList = document.querySelector('.todo-list'); //todo-list es una cla
 
 const txtInput = document.querySelector('.new-todo'); //apunta a la clase new-todo del input ubicado en el index.html
 
+const btnBorrarTodos = document.querySelector('.clear-completed'); //apunta al boton que dice eliminar completados
+
 export const crearTodoHtml = (todo) => {
 
     const htmlTodo = `
@@ -54,7 +56,7 @@ divTodoList.addEventListener('click', (event) => {
     //console.log('Click');
     //console.log(event.target.localName);
     const nombreElemento = event.target.localName; //input, label o button
-    const todoElemento = event.target.parentElement.parentElement; //permite tener la referencia al li
+    const todoElemento = event.target.parentElement.parentElement; //permite tener la referencia al <li>
 
     const todoId = todoElemento.getAttribute('data-id'); //obtiene el id
 
@@ -68,4 +70,20 @@ divTodoList.addEventListener('click', (event) => {
 
 
     //console.log(todoList);
+});
+
+
+btnBorrarTodos.addEventListener('click', () => {
+    todoList.eliminarCompletados();
+
+    for (let i = divTodoList.children.length-1; i>=0; i--){ //for inverso
+
+        const elemento = divTodoList.children[i]; //recupera todo el elemento <li>
+
+        if(elemento.classList.contains('completed')){ //si la clase contiene completed (completado)
+            divTodoList.removeChild(elemento); //lo remueve
+        }
+
+    }
+
 });

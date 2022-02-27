@@ -6,6 +6,18 @@
 
 export class Todo {
 
+    static fromJson ({id, tarea, completado, creado}){ 
+        //esto permite recuperar lo almacenado en el json y transformarlo en instancias
+        // para usar sus propios métodos sin problemas
+
+        const tempTodo = new Todo(tarea);
+
+        tempTodo.id = id;
+        tempTodo.completado = completado;
+        tempTodo.creado = creado;
+
+        return tempTodo;
+    }
     constructor (tarea) {
 
         this.tarea = tarea;
