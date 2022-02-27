@@ -1,28 +1,51 @@
+// importaciones
+import { Todo } from "../classes";
 
-import '../css/componentes.css';
+import { todoList} from "../index";
 
-//import webpacklogo from '../assets/img/webpack-logo.png';
+// referencias en el HTML
 
-//import img from '../assets/img/webpack-logo.png';
+const divTodoList = document.querySelector('.todo-list'); //todo-list es una clase del html index principal
 
-// función saludar
+const txtInput = document.querySelector('.new-todo'); //apunta a la clase new-todo del input ubicado en el index.html
 
-//para exportar la funcion y que pueda ser importada a otro archivo js
-// se debe colocar la palabra export antes de la función
-export const saludar = (nombre) => {
-    console.log('Creando etiqueta h1');
+export const crearTodoHtml = (todo) => {
 
-    const h1 = document.createElement('h1');
+    const htmlTodo = `
+    <li class="${(todo.completado) ? 'completed' : '' }" data-id="${todo.id}">
+						<div class="view">
+							<input class="toggle" type="checkbox" ${(todo.completado) ? 'checked' : ''}>
+							<label>${todo.tarea}</label>
+							<button class="destroy"></button>
+						</div>
+						<input class="edit" value="Create a TodoMVC template">
+	</li>    
+    `;
+    const div = document.createElement('div'); // crea un elemento div html
 
-    h1.innerText = `Hola, ${ nombre } !!!`;
+    div.innerHTML = htmlTodo; // el inner html inyecta el código de la constante htmlTodo al div
 
-    document.body.append(h1);
+    divTodoList.append(div.firstElementChild); //el append agrega la constante div al documento
+                        //extrae el primer elemento
 
-
-    //img
-
-    //const img = document.createElement('img');
-    //img.src = webpacklogo;
-    //document.body.append(img);
+    return div.firstElementChild; //retorna el div
 }
 
+
+// eventos
+
+txtInput.addEventListener('keyup', (event) => {
+    
+
+    if (event.code === "Enter" && txtInput.value.length > 0) { //captura cuando presiona enter y ingresa en el if
+        // el txtInput.value.length > 0 evita que entre al if si el largo del string en el input es 0
+        const nuevoTodo = new Todo(txtInput.value);
+        //console.log(txtInput.value);
+        todoList.nuevoTodo(nuevoTodo); //llamando el método del todoList y se le agrega el nuevo todo
+
+        crearTodoHtml(nuevoTodo); //crea el todo para visualizarlo en el html
+        txtInput.value = ''; // una vez que se apreta enter, el txt input vuelve a estar vacío
+        console.log(todoList);
+    }
+
+});

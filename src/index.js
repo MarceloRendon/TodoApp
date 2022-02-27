@@ -1,22 +1,20 @@
 
 
 // importar modulos
-import {saludar} from './js/componentes'; //se puede omitir el .js y quedar './js/componentes'
-
+//import { TodoList } from './classes/todo-list.class';
+//import { Todo } from './classes/todo.class';
+import {Todo, TodoList} from './classes'; //busca el index.js de la carpeta classes por defecto
+import { crearTodoHtml } from './js/componentes';
+//import {saludar} from './js/componentes'; //se puede omitir el .js y quedar './js/componentes'
 import './styles.css';
 
-const nombre = 'Marcelo';
+export const todoList = new TodoList();
 
-// npm init
-// npm install webpack webpack-cli --save-dev
-// configurar el build en el package.json
-// npm run build para actualizar el main.js
+const tarea = new Todo('Aprender JavaScript');
 
-//la carpeta dist es de producción
+// agrega la tarea con el método, al arreglo del objeto todoList
+todoList.nuevoTodo(tarea);
 
-// crear archivo webpack.config.js y agregar el modulo de development
-//luego npm run build para actualizar el main.js
+console.log(todoList);
 
-// agregar npm install --save-dev html-loader
-// y agregar npm install --save-dev html-webpack-plugin
-saludar(nombre);
+crearTodoHtml(tarea); //agrega al html la tarea, mediante la función del componente.js de la carpeta js
