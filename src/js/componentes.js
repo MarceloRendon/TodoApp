@@ -61,8 +61,11 @@ divTodoList.addEventListener('click', (event) => {
     if (nombreElemento.includes('input')) { // hizo click en el check
         todoList.marcarCompletado(todoId);
         todoElemento.classList.toggle('completed'); //permite que se tache la tarea marcada en el checkbox
-    } 
+    } else if (nombreElemento.includes('button')) { // hizo click en la X, hay que borrar el todo
+        todoList.eliminarTodo(todoId);
+        divTodoList.removeChild(todoElemento); // eliminando el elemento html
+    }
 
 
-    console.log(todoList);
+    //console.log(todoList);
 });

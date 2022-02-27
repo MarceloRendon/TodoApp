@@ -15,7 +15,7 @@ export class TodoList {
     }
 
     eliminarTodo (id) {
-
+        this.todos = this.todos.filter(todo => todo.id != id); //va a regresar un nuevo arreglo sobre escribiendo los valores en this.todos
     }
 
     marcarCompletado (id) {
