@@ -1,4 +1,4 @@
-import {} from './todo.class';
+import { Todo } from './todo.class';
 
 export class TodoList {
 

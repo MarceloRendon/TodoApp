@@ -11,6 +11,10 @@ const txtInput = document.querySelector('.new-todo'); //apunta a la clase new-to
 
 const btnBorrarTodos = document.querySelector('.clear-completed'); //apunta al boton que dice eliminar completados
 
+const ulFiltros = document.querySelector('.filters'); // seleccionar los filtros
+
+const anchorFiltros = document.querySelectorAll('.filtro');
+
 export const crearTodoHtml = (todo) => {
 
     const htmlTodo = `
@@ -85,5 +89,43 @@ btnBorrarTodos.addEventListener('click', () => {
         }
 
     }
+
+});
+
+
+
+ulFiltros.addEventListener('click', (event) => {
+
+    const filtro = event.target.text;
+    if( !filtro ){ return; }
+
+    anchorFiltros.forEach( elem => elem.classList.remove('selected') );
+    event.target.classList.add('selected');
+
+    for( const elemento of divTodoList.children ) {
+
+        elemento.classList.remove('hidden');
+        const completado = elemento.classList.contains('completed');
+
+        switch( filtro ) {
+
+            case 'Pendientes':
+                if( completado ) {
+                    elemento.classList.add('hidden');
+                }
+            break;
+
+            case 'Completados':
+                if( !completado ) {
+                    elemento.classList.add('hidden');
+                }
+            break;
+
+        }
+
+
+    }
+
+
 
 });
